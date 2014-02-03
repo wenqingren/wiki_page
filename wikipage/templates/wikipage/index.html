@@ -1,0 +1,33 @@
+{% extends 'wikipage/base.html' %}
+
+{% block title %}Index{% endblock %}
+{% block logo_title %}Index{% endblock %}
+
+{% block content%}
+    <hr />
+    <p><form><input type="text" name="wikipage_search"><button class="btn btn-large btn-primary" input type="submit" value ="Search">Search Page</button></form></p>
+    {% if info %}
+    <h3>{{ info }}</h3>
+    {% endif %}
+    {% if wikipage_list %}
+    <table class='table table-hover'>
+        <thead>
+        <tr>
+            <th>Wiki Page Title</th>
+            <th>Updated Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for wikipage in wikipage_list %}
+            <tr>
+                <td><a href="{% url 'wikipage_detail' wikipage.title %}">{{ wikipage.title }}</a></td>
+                <td>{{ wikipage.get_current_contents.update_time|date:"d/m/Y H:i:s" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h4>No Wiki Pages Found</h4>
+    {% endif %}
+
+{% endblock %}

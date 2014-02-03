@@ -1,0 +1,17 @@
+{% extends 'wikipage/base.html' %}
+
+{% block title %}{{ shown_title }}{% endblock%}
+{% block logo_title %}{{ shown_title }}{% endblock%}
+
+{% block content %}
+    <hr />
+    {% if wikipage %}
+        {{ page_body|safe }}
+        <hr />
+        <p><a href="{% url 'edit_wikipage' page_title %}">Edit Page</a></p>
+        <p><a href="{% url 'wikipage_history' page_title %}">Page History</a></p>
+    {% else %}
+        <p><a href="{% url 'edit_wikipage' page_title %}">Create this page</a></p>
+    {% endif %}
+{% endblock %}
+

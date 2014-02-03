@@ -1,0 +1,30 @@
+{% extends 'wikipage/base.html' %}
+{% load page_title_tag %}
+
+{% block title %}{{ wikipage_title|shownpagetitle }} History{% endblock %}
+{% block logo_title %}{{ wikipage_title|shownpagetitle }} History{% endblock %}
+
+{% block content%}
+    <hr />
+    {% if history_list %}
+    <table class='table table-hover'>
+        <thead>
+        <tr>
+            <th>Edit Time</th>
+            <th>Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for history in history_list %}
+            <tr>
+                <td>{{ history.update_time|date:"d/m/Y H:i:s" }}</td>
+                <td>{{ history.comment }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h4>No History Found</h4>
+    {% endif %}
+
+{% endblock %}
